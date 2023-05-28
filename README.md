@@ -5,7 +5,7 @@
 1. To clone the repository:
 
     ```bash
-    git clone https://github.com/kimanikevin254/paymentshub-python-custom-pay-api.git python-custom-pay-api
+    git clone https://github.com/kimanikevin254/paymentshub-flask-custompayapi.git python-custom-pay-api
     ```
 
 2. `cd` into the created folder.
