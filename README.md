@@ -14,7 +14,7 @@
     cd python-custom-pay-api
     ```
 
-3. Open `main.py` and replace `<your-epi-id>` and `<your-epi-key>` with the creadentials provided by Payments Hub.
+3. Open `app.py` and replace `<your-epi-id>` and `<your-epi-key>` with the creadentials provided by Payments Hub.
 
 4. To run the app:
 
