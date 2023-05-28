@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background-color: #f7f7f7;
+          font-family: Arial, sans-serif;
+        }
+      
+        .container {
+          display: flex;
+          align-items: center;
+        }
+      
+        .product-container,
+        form {
+          flex: 1;
+          padding: 20px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+      
+        .product-container {
+          margin-right: 20px;
+        }
+      
+        .product-image img {
+          max-width: 230px;
+          height: auto;
+          margin: 0 auto;
+          margin-left: 1.3rem;
+          border-radius: 5px;
+        }
+      
+        .product-details {
+          margin-left: 20px;
+        }
+      
+        .product-title {
+          font-size: 24px;
+          font-weight: bold;
+          margin: 0;
+        }
+      
+        .product-description {
+          margin-top: 10px;
+          color: #555;
+        }
+      
+        .product-price {
+          margin-top: 10px;
+          font-weight: bold;
+        }
+      
+        .discount {
+          color: #ff5722;
+          font-weight: normal;
+        }
+      
+        form {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      
+        label {
+          display: block;
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+      
+        input[type="number"],
+        input[type="text"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          box-sizing: border-box;
+        }
+      
+        button[type="submit"] {
+          padding: 10px 20px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 3px;
+          cursor: pointer;
+          font-size: 16px;
+        }
+      </style>     
+</head>
+<body>
+    <div class="container">
+      <div class="product-container">
+        <div class="product-image">
+          <img src="https://i.dummyjson.com/data/products/1/thumbnail.jpg" alt="Product Thumbnail">
+        </div>
+        <div class="product-details">
+          <h2 class="product-title">iPhone 9</h2>
+          <p class="product-description">An apple mobile which is nothing like apple</p>
+          <p class="product-price">
+            Price: $549
+            <span class="discount">(-12.96%)</span>
+          </p>
+        </div>
+      </div>
+  
+      <form>
+        <div>
+          <label for="account">Account Number:</label>
+          <input type="text" name="account" id="account" value="4111111111111111" required>
+        </div>
+        <div>
+          <label for="expirationDate">Expiration Date:</label>
+          <input type="text" name="expirationDate" id="expirationDate" value="2504" required>
+          <div>
+            <label for="cvv2">CVV2:</label>
+            <input type="text" name="cvv2" id="cvv2" value="123" required>
+          </div>
+          <button type="submit" id="buyNow">Buy Now</button>
+        </form>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const form = document.querySelector('form');
+          form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+      
+            const accountNumber = document.getElementById('account').value;
+            const expirationDate = document.getElementById('expirationDate').value;
+            const cvv2 = document.getElementById('cvv2').value;
+      
+            const payload = {
+              accountNumber,
+              expirationDate,
+              cvv2,
+              amount: 549.00
+            };
+      
+            try {
+              const response = await fetch('/', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+              });
+      
+              const data = await response.json();
+              
+              if(data.includes('APPROVAL')){
+                alert('Transaction processed successfully')
+              } else {
+                alert('An error occured when processing your transaction')
+              }
+            } catch (error) {
+              // An error occurred during the request
+              console.log('An error occurred', error);
+            }
+          });
+        });
+      </script>      
+    </body>
+</html>
